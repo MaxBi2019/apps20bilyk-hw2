@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class ImmutableArrayList implements ImmutableList{
 
-    private final int startSize = 10;
+    private static final int startSize = 10;
     private int pSize;
     private int lSize;
     private Object[] arrayList;
@@ -36,11 +36,14 @@ public class ImmutableArrayList implements ImmutableList{
         }
     }
 
-    private void copyTo(Object[] Dest, int posDest, int posFrom, int length)
+    private void copyTo(Object[] dest, int posDest, int posFrom, int size)
     {
-        if (length == -1)
+        int length = size;
+        if (size == -1)
+        {
             length = lSize;
-        System.arraycopy(arrayList, posFrom, Dest, posDest, length);
+        }
+        System.arraycopy(arrayList, posFrom, dest, posDest, length);
     }
 
     private ImmutableArrayList configArray()
@@ -87,9 +90,18 @@ public class ImmutableArrayList implements ImmutableList{
     {
         int size;
         if (hasEnoughSpace(toInsert.length))
+        {
             size = pSize;
+        }
         else
-            size = (toInsert.length > pSize) ? toInsert.length*2 : pSize*2;
+            if (toInsert.length > pSize)
+            {
+                size = toInsert.length * 2;
+            }
+            else
+            {
+                size = pSize * 2;
+            }
         Object[] buffer = new Object[size];
         for (int ind = toInsert.length; ind > 0; --ind)
             buffer[ind+index-1] = toInsert[ind-1];
@@ -175,7 +187,9 @@ public class ImmutableArrayList implements ImmutableList{
         for (int ind = lSize; ind > 0; --ind)
         {
             if (arrayList[lSize - ind] == e)
-                return  lSize - ind;
+            {
+                return lSize - ind;
+            }
         }
         return -1;
     }

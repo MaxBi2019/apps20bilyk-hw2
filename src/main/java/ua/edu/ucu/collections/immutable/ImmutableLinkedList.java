@@ -4,16 +4,23 @@ import java.util.Arrays;
 
 public class ImmutableLinkedList implements ImmutableList
 {
-    private final int NOTFOUND = -1;
+    private static final int NOTFOUND = -1;
     private Node head;
     private Node tail;
     private int  size;
+
+    public ImmutableLinkedList()
+    {
+        head = null;
+        tail = null;
+        size = 0;
+    }
 
     private ImmutableLinkedList copy()
     {
         ImmutableLinkedList copied = new ImmutableLinkedList();
         Node cur = head;
-        for (int index = 0; index < size; ++index, cur=cur.getNext())
+        for (int index = 0; index < size; ++index, cur = cur.getNext())
         {
             insert(index, cur.getData(), copied);
         }
@@ -53,7 +60,7 @@ public class ImmutableLinkedList implements ImmutableList
                 return counter;
             }
             ++counter;
-            cur=cur.getNext();
+            cur = cur.getNext();
         }
         return NOTFOUND;
 
@@ -70,7 +77,8 @@ public class ImmutableLinkedList implements ImmutableList
         Node previous;
         if (lst.size == 1)
         {
-            lst.head = lst.tail = null;
+            lst.head = null;
+            lst.tail = null;
         }
         else if (index == 0)
         {
@@ -229,7 +237,7 @@ public class ImmutableLinkedList implements ImmutableList
         Object[] lst = new Object[size];
         int length = size;
         Node   cur = head;
-        for (int index = 0; index < length; ++index, cur=cur.getNext())
+        for (int index = 0; index < length; ++index, cur = cur.getNext())
         {
             lst[index] = cur.getData();
         }
@@ -244,7 +252,7 @@ public class ImmutableLinkedList implements ImmutableList
     }
 
 
-    private class Node
+    private static class Node
     {
         private Object data;
         private Node next;
@@ -259,25 +267,18 @@ public class ImmutableLinkedList implements ImmutableList
         {
             return next;
         }
-        private void setData(Object data)
+        private void setData(Object newData)
         {
-            this.data = data;
+            data = newData;
         }
-        private void setNext(Node next)
+        private void setNext(Node newNext)
         {
-            this.next = next;
+            next = newNext;
         }
         private Object getData()
         {
             return data;
         }
-    }
-
-    public ImmutableLinkedList()
-    {
-        head = null;
-        tail = null;
-        size = 0;
     }
 
     public ImmutableLinkedList addFirst(Object e)
