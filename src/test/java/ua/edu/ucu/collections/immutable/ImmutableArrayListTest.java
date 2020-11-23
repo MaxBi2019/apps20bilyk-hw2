@@ -66,7 +66,9 @@ public class ImmutableArrayListTest {
         assertArrayEquals(lst.toArray(), rev);
         assertTrue(str.equals(lst.toString()));
 
-        for (int index = arr.length; index > 0; --index)
+        lst.remove(1);
+        lst.remove(0);
+        for (int index = lst.size(); index > 0; --index)
         {
             lst = lst.remove(index-1);
         }
@@ -85,5 +87,63 @@ public class ImmutableArrayListTest {
         }
         assertEquals(-1 , lst.indexOf(arr.length + 1));
     }
-    
+
+
+    @Test
+    public void testClearNIsEmpty()
+    {
+        Object[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        ImmutableList lst = new ImmutableArrayList();
+        assertTrue(lst.isEmpty());
+        lst = lst.addAll(arr);
+        assertFalse(lst.isEmpty());
+        lst = lst.clear();
+        assertTrue(lst.isEmpty());
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testWrongRemove()
+    {
+        ImmutableList lst = new ImmutableLinkedList();
+
+        // expect exception here
+        lst.remove(1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testWrongSet()
+    {
+        ImmutableList lst = new ImmutableLinkedList();
+
+        // expect exception here
+        lst.set(1, 1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testWrongGet()
+    {
+        ImmutableList lst = new ImmutableLinkedList();
+
+        // expect exception here
+        lst.get(1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testWrongAdd()
+    {
+        ImmutableList lst = new ImmutableLinkedList();
+
+        // expect exception here
+        lst.add(1, 1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testWrongAddAll()
+    {
+        ImmutableList lst = new ImmutableLinkedList();
+
+        // expect exception here
+        Object[] arr = {1, 2, 3};
+        lst.add(1, arr);
+    }
 }

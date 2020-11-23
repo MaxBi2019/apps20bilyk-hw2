@@ -179,4 +179,50 @@ public class ImmutableLinkedListTest {
 
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testWrongRemove()
+    {
+        ImmutableList lst = new ImmutableLinkedList();
+
+        // expect exception here
+        lst.remove(1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testWrongSet()
+    {
+        ImmutableList lst = new ImmutableLinkedList();
+
+        // expect exception here
+        lst.set(1, 1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testWrongGet()
+    {
+        ImmutableList lst = new ImmutableLinkedList();
+
+        // expect exception here
+        lst.get(1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testWrongAdd()
+    {
+        ImmutableList lst = new ImmutableLinkedList();
+
+        // expect exception here
+        lst.add(1, 1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testWrongAddAll()
+    {
+        ImmutableList lst = new ImmutableLinkedList();
+
+        // expect exception here
+        Object[] arr = {1, 2, 3};
+        lst.add(1, arr);
+    }
 }
+

@@ -3,7 +3,8 @@ package ua.edu.ucu.collections;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class StackTest {
+public class StackTest
+{
 
     @Test
     public void testPeekNPopNPush()
@@ -21,5 +22,23 @@ public class StackTest {
             assertEquals(stack.peek(), arr[ind]);
             assertEquals(stack.pop(), arr[ind]);
         }
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testWrongPeek()
+    {
+        Stack stack = new Stack();
+
+        // expect exception here
+        stack.peek();
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testDeque()
+    {
+        Stack stack = new Stack();
+
+        // expect exception here
+        stack.pop();
     }
 }

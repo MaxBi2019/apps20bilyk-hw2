@@ -1,6 +1,9 @@
 package ua.edu.ucu.collections;
 
 import org.junit.Test;
+import ua.edu.ucu.collections.immutable.ImmutableLinkedList;
+import ua.edu.ucu.collections.immutable.ImmutableList;
+
 import static org.junit.Assert.*;
 
 public class QueueTest {
@@ -21,5 +24,22 @@ public class QueueTest {
             assertEquals(queue.dequeue(), arr[ind-1]);
         }
     }
-    
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testWrongPeek()
+    {
+        Queue queue = new Queue();
+
+        // expect exception here
+        queue.peek();
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testDeque()
+    {
+        Queue queue = new Queue();
+
+        // expect exception here
+        queue.dequeue();
+    }
 }
