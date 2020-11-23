@@ -2,18 +2,19 @@ package ua.edu.ucu.collections.immutable;
 
 import java.util.Arrays;
 
-public class ImmutableArrayList implements ImmutableList{
+public class ImmutableArrayList implements ImmutableList
+{
 
-    private static final int startSize = 10;
+    private static final int STARTSIZE = 10;
     private int pSize;
     private int lSize;
     private Object[] arrayList;
 
     public ImmutableArrayList()
     {
-        pSize = startSize;
+        pSize = STARTSIZE;
         lSize = 0;
-        arrayList = new Object[startSize];
+        arrayList = new Object[STARTSIZE];
     }
 
     private boolean hasEnoughSpace(int num)
@@ -104,7 +105,9 @@ public class ImmutableArrayList implements ImmutableList{
             }
         Object[] buffer = new Object[size];
         for (int ind = toInsert.length; ind > 0; --ind)
-            buffer[ind+index-1] = toInsert[ind-1];
+        {
+            buffer[ind + index - 1] = toInsert[ind - 1];
+        }
 
         if (!isEmpty())
         {
